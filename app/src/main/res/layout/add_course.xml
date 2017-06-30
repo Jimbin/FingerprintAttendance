@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="20dp"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/courseName"
+        style="@style/EditTextStyle"
+        android:hint="课程名"
+        android:drawableLeft="@drawable/title"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/courseDescription"
+        style="@style/EditTextStyle"
+        android:hint="课程简介"
+        android:drawableLeft="@drawable/describtion"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/courseTime"
+        style="@style/EditTextStyle"
+        android:hint="课程时间"
+        android:drawableLeft="@drawable/coursetime"
+        android:inputType="phone"/>
+    <EditText
+        android:id="@+id/courseLocation"
+        style="@style/EditTextStyle"
+        android:hint="课程地点"
+        android:drawableLeft="@drawable/courselocation"
+        android:inputType="text"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Space
+            android:id="@+id/spacer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="invisible" />
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonBarNegativeButtonStyle"
+            android:layout_gravity="end"
+            android:text="确定"
+            tools:targetApi="lollipop" />
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonBarNegativeButtonStyle"
+            android:text="取消"
+            tools:targetApi="lollipop" />
+    </LinearLayout>
+
+
+</LinearLayout>

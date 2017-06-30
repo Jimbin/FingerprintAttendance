@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="F:\Demo\fingerprintattendance\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7fa6dac7c2913d2cf1c6e85c288cf8fe0c926902">
+        <dex dex="F:\Demo\fingerprintattendance\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_a25c5652c88dc713761e93c7d0f8fec72d11fbcd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="F:\Demo\fingerprintattendance\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="F:\Demo\fingerprintattendance\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_426e4ca3a0eb935a8accb566585e0b2c5d41c8dd\classes.dex" />
+    </item>
+
+</items>
