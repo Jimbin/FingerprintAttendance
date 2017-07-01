@@ -4,64 +4,47 @@
     android:layout_height="match_parent"
     android:divider="@drawable/divider"
     android:showDividers="middle"
-    android:padding="15dp"
-    android:orientation="vertical">
-    <LinearLayout
+    android:orientation="vertical"
+    android:background="@color/orange"
+    >
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="5dp"
-        android:id="@+id/Information">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/ic_information"/>
+        android:layout_height="180dp"
+        android:id="@+id/bg">
+    <ImageView
+        android:id="@+id/account_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/tu"
+        />
         <TextView
+            android:textColor="@color/blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/account_name"
             android:layout_marginLeft="30dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="个人信息"
-            android:textSize="24dp"/>
-    </LinearLayout>
-    <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="50dp"
+            android:text="Dog"
+            android:textSize="25sp"
+            android:layout_toRightOf="@+id/account_image"
+
+            />
+
+    </RelativeLayout>
+    <View
+        android:background="#efefef"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="5dp"
-        android:id="@+id/Information1">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/ic_information"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="个人信息"
-            android:textSize="24dp"/>
-    </LinearLayout>
-    <LinearLayout
+        android:layout_height="15dp"></View>
+    <ListView
+        android:divider="@null"
+        android:id="@+id/item_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="5dp"
-        android:id="@+id/Information2">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/ic_information"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="个人信息"
-            android:textSize="24dp"/>
-    </LinearLayout>
+        android:layout_height="match_parent">
+    </ListView>
 
 </LinearLayout>

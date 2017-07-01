@@ -1,11 +1,11 @@
 package com.example.wangchang.testbottomnavigationbar;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Window;
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
@@ -32,9 +32,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 .setBackgroundColor(Color.RED)
                 .setText("5")
                 .setHideOnSelect(true);
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_add_white_24dp, "创建").setActiveColorResource(R.color.orange))
-                .addItem(new BottomNavigationItem(R.drawable.ic_group_add_black_24dp, "加入").setActiveColorResource(R.color.orange))
-                .addItem(new BottomNavigationItem(R.drawable.courselocation, "我").setActiveColorResource(R.color.orange))
+        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_add_white_24dp, "创建")
+                .setActiveColorResource(R.color.orange))
+                .addItem(new BottomNavigationItem(R.drawable.ic_group_add_black_24dp, "加入")
+                .setActiveColorResource(R.color.orange))
+                .addItem(new BottomNavigationItem(R.drawable.courselocation, "我")
+                        .setActiveColorResource(R.color.orange))
                 .setFirstSelectedPosition(0)
                 .initialise();
 
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(AddFragment.newInstance("添加课程"));
         fragments.add(JoinFragment.newInstance("加入课程"));
-        fragments.add(AccountFragment.newInstance("我"));
+        fragments.add(AccountFragment.newInstance("我",this));
         return fragments;
     }
 
