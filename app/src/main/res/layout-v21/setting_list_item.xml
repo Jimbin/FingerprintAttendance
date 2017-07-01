@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#faf8f8"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:src="@drawable/ttt"
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+
+    <TextView
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/icon"
+        android:id="@+id/item_name"
+        android:text="ttt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_marginTop="16dp"
+        android:src="@drawable/arrow"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentRight="true"
+        android:id="@+id/arrow"
+        android:layout_width="16dp"
+        android:layout_height="16dp" />
+
+    <View
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/arrow"
+        android:id="@+id/gap_view"
+        android:background="#efefef"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"></View>
+
+    <View
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/arrow"
+        android:id="@+id/small_gap_view"
+        android:background="#efefef"
+        android:layout_marginLeft="65dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"></View>
+
+</RelativeLayout>
