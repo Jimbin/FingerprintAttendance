@@ -22,8 +22,7 @@
         android:id="@+id/courseTime"
         style="@style/EditTextStyle"
         android:hint="课程时间"
-        android:drawableLeft="@drawable/coursetime"
-        android:inputType="phone"/>
+        android:drawableLeft="@drawable/coursetime"/>
     <EditText
         android:id="@+id/courseLocation"
         style="@style/EditTextStyle"

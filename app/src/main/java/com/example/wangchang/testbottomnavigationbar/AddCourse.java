@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import Beans.Course;
@@ -79,9 +80,17 @@ public class AddCourse extends DialogFragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String path = "http://www.hitolx.cn:8080/web0427/android/buildCourse.action?";
-                path=path+"sessionId="+User.sessionId+"courseName="+courseName.getText();
-                HttpUtils.getHttpData(path,handler);
+                String path = "http://www.hitolx.cn:8080/web0427/android/buildCourse.action";
+                String body = "sessionId="+ URLEncoder.encode(User.sessionId)+"&courseName=" + URLEncoder.encode(courseName.getText().toString()) +
+                        "&courseTime=" + URLEncoder.encode(courseTime.getText().toString())+"&courseLocation=" + URLEncoder.encode(courseLocation.getText().toString())+
+                        "&courseDescribe=" + URLEncoder.encode(courseDescription.getText().toString());
+                HttpUtils.postHttpData(path,handler,body);
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDialog().dismiss();
             }
         });
 

@@ -12,9 +12,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import org.json.JSONObject;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,6 +78,24 @@ public class JoinFragment extends Fragment{
         String path = "http://www.hitolx.cn:8080/web0427/android/getJoinCoursesAll.action?sessionId=";
         path=path+ User.sessionId;
         HttpUtils.getHttpData(path,handler);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // TODO Auto-generated method stub
+        switch(item.getItemId()){
+            case R.id.add_item:
+                JoinCourse passwordDialogFragment = new JoinCourse();
+                passwordDialogFragment.show(getActivity().getFragmentManager(), "JoinCourseFragment");
+
+                break;
+            case R.id.remove_item:
+
+                Toast.makeText(getActivity(), ""+"删除", Toast.LENGTH_SHORT).show();
+                break;
+        }
+//         Toast.makeText(MainActivity.this, ""+item.getItemId(), Toast.LENGTH_SHORT).show();
+
+        return super.onOptionsItemSelected(item);
     }
 
     public static JoinFragment newInstance(String content) {
@@ -135,12 +156,9 @@ public class JoinFragment extends Fragment{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        /**
-         * 在你获取的string这个JSON对象中，提取你所需要的信息。
-         */
+        String message = object.optString("message");
+        if(!message.equals("退出课程成功")){
         try {
-
-
             JSONArray jsonArray=object.getJSONArray("courseVOs");
             for (int i=0;i<jsonArray.length();i++)
             {
@@ -148,10 +166,10 @@ public class JoinFragment extends Fragment{
                 JSONObject ObjectInfo = jsonArray.optJSONObject(i);
                 temp.setCourseId(ObjectInfo.optString("courseId")==null?"":ObjectInfo.optString("courseId"));
                 temp.setCourseDescribe(ObjectInfo.optString("courseDescribe")==null?"":ObjectInfo.optString("courseDescribe"));
-                temp.setCourseLocation(ObjectInfo.optString("courselocation")==null?"":ObjectInfo.optString("courselocation"));
+                temp.setCourseLocation(ObjectInfo.optString("courseLocation")==null?"":ObjectInfo.optString("courseLocation"));
                 temp.setCourseName(ObjectInfo.optString("courseName")==null?"":ObjectInfo.optString("courseName"));
                 temp.setCourseStatus(ObjectInfo.optString("courseStatus")==null?"":ObjectInfo.optString("courseStatus"));
-                temp.setCourseTime(ObjectInfo.optString("coursetime")==null?"":ObjectInfo.optString("coursetime"));
+                temp.setCourseTime(ObjectInfo.optString("courseTime")==null?"":ObjectInfo.optString("courseTime"));
                 temp.setCreateTime(ObjectInfo.optString("createTime")==null?"":ObjectInfo.optString("createTime"));
                 temp.setMemberId(ObjectInfo.optString("memberId")==null?"":ObjectInfo.optString("memberId"));
                 temp.setSignStatus(ObjectInfo.optString("signStatus")==null?"":ObjectInfo.optString("signStatus"));
@@ -165,7 +183,13 @@ public class JoinFragment extends Fragment{
         }
         mData = getData();
         MyAdapter myAdapter=new MyAdapter(getActivity().getBaseContext());
-        listView.setAdapter(myAdapter);
+        listView.setAdapter(myAdapter);}
+        else{
+            Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
+            String path = "http://www.hitolx.cn:8080/web0427/android/getJoinCoursesAll.action?sessionId=";
+            path=path+ User.sessionId;
+            HttpUtils.getHttpData(path,handler);
+        }
     }
 
     public final class ViewHolder{
@@ -173,6 +197,7 @@ public class JoinFragment extends Fragment{
         public TextView ClassTime;
         public TextView ClassLocation;
         public LinearLayout item;
+        public Button button;
     }
 
 
@@ -216,6 +241,7 @@ public class JoinFragment extends Fragment{
                 holder.ClassTime = (TextView) convertView.findViewById(R.id.ClassTime);
                 holder.ClassLocation = (TextView) convertView.findViewById(R.id.ClassLocation);
                 holder.item=(LinearLayout)convertView.findViewById(R.id.item);
+                holder.button=(Button)convertView.findViewById(R.id.detail);
                 convertView.setTag(holder);
 
             }else {
@@ -237,6 +263,15 @@ public class JoinFragment extends Fragment{
                     startActivity(intent);
                 }
             });
+            holder.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public  void onClick(View view) {
+                    String url="http://www.hitolx.cn:8080/web0427/android/exitCourse.action";
+                    String body = "sessionId="+ URLEncoder.encode(User.sessionId)+"&courseId=" + URLEncoder.encode(Courses.get(pos).getCourseId());
+                    HttpUtils.postHttpData(url,handler,body);
+                }
+            });
+
 
             return convertView;
         }

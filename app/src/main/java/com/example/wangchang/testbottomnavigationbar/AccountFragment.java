@@ -9,26 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.wangchang.testbottomnavigationbar.Adapter.ListitemAdaper;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import Beans.StringAndInt;
 
 /**
  * Created by 打错的明天 on 2017/5/15.
  */
 public class AccountFragment extends Fragment{
-
     private List<StringAndInt> list;
     private ListView item_list;
     private static Context mcontext;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.account_fragment, container, false);
         item_list= (ListView) view.findViewById(R.id.item_list);
         initList();
@@ -50,7 +43,6 @@ public class AccountFragment extends Fragment{
         mcontext=context;
         return fragment;
     }
-
     private void initList(){
         list=new ArrayList<StringAndInt>();
         list.add(new StringAndInt("个人信息",R.drawable.person,true));

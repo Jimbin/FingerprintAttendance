@@ -1,9 +1,8 @@
 package com.example.wangchang.testbottomnavigationbar;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Record_Detail extends AppCompatActivity {
+public class Record_Detail extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

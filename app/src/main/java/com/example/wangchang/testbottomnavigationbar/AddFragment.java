@@ -33,6 +33,7 @@ import org.json.JSONObject;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +44,7 @@ import Beans.User;
 
 import static android.R.attr.path;
 import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
+import static com.example.wangchang.testbottomnavigationbar.R.id.courseId;
 import static com.example.wangchang.testbottomnavigationbar.R.id.tv;
 
 /**
@@ -90,14 +92,13 @@ public class AddFragment extends Fragment {
         // TODO Auto-generated method stub
         switch(item.getItemId()){
             case R.id.add_item:
-                Toast.makeText(getActivity(), ""+"关于", Toast.LENGTH_SHORT).show();
                 AddCourse passwordDialogFragment = new AddCourse();
                 passwordDialogFragment.show(getActivity().getFragmentManager(), "PasswordDialogFragment");
 
                 break;
             case R.id.remove_item:
 
-                Toast.makeText(getActivity(), ""+"设置", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), ""+"删除", Toast.LENGTH_SHORT).show();
                 break;
         }
 //         Toast.makeText(MainActivity.this, ""+item.getItemId(), Toast.LENGTH_SHORT).show();
@@ -162,12 +163,9 @@ public class AddFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        /**
-         * 在你获取的string这个JSON对象中，提取你所需要的信息。
-         */
+        String message = object.optString("message");
+        if(!message.equals("删除成功")){
         try {
-
-
             JSONArray jsonArray=object.getJSONArray("courses");
             for (int i=0;i<jsonArray.length();i++)
             {
@@ -193,6 +191,12 @@ public class AddFragment extends Fragment {
         mData = getData();
         MyAdapter myAdapter=new MyAdapter(getActivity().getBaseContext());
         listView.setAdapter(myAdapter);
+        }else {
+            Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
+            String path = "http://www.hitolx.cn:8080/web0427/android/getCoursesBelongMember.action?sessionId=";
+            path=path+ User.sessionId;
+            HttpUtils.getHttpData(path,handler);
+        }
     }
 
 
@@ -201,6 +205,7 @@ public class AddFragment extends Fragment {
         public TextView ClassTime;
         public TextView ClassLocation;
         public LinearLayout item;
+        public Button button;
     }
 
 
@@ -244,6 +249,7 @@ public class AddFragment extends Fragment {
                 holder.ClassTime = (TextView) convertView.findViewById(R.id.ClassTime);
                 holder.ClassLocation = (TextView) convertView.findViewById(R.id.ClassLocation);
                 holder.item=(LinearLayout)convertView.findViewById(R.id.item);
+                holder.button=(Button)convertView.findViewById(R.id.detail);
                 convertView.setTag(holder);
 
             }else {
@@ -263,6 +269,14 @@ public class AddFragment extends Fragment {
                     bundle.putSerializable("course", Courses.get(position));
                     intent.putExtras(bundle);
                     startActivity(intent);
+                }
+            });
+            holder.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public  void onClick(View view) {
+                    String url="http://www.hitolx.cn:8080/web0427/android/deleteCourse.action";
+                    String body = "sessionId="+ URLEncoder.encode(User.sessionId)+"&courseId=" + URLEncoder.encode(Courses.get(position).getCourseId());
+                    HttpUtils.postHttpData(url,handler,body);
                 }
             });
 

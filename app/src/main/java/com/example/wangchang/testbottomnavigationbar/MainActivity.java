@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
@@ -14,7 +13,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener {
+public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener {
     private ArrayList<Fragment> fragments;
 
     @Override
@@ -32,12 +31,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 .setBackgroundColor(Color.RED)
                 .setText("5")
                 .setHideOnSelect(true);
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_add_white_24dp, "创建")
-                .setActiveColorResource(R.color.orange))
-                .addItem(new BottomNavigationItem(R.drawable.ic_group_add_black_24dp, "加入")
-                .setActiveColorResource(R.color.orange))
-                .addItem(new BottomNavigationItem(R.drawable.courselocation, "我")
-                        .setActiveColorResource(R.color.orange))
+        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_add_white_24dp, "创建").setActiveColorResource(R.color.orange))
+                .addItem(new BottomNavigationItem(R.drawable.ic_group_add_black_24dp, "加入").setActiveColorResource(R.color.orange))
+                .addItem(new BottomNavigationItem(R.drawable.courselocation, "我").setActiveColorResource(R.color.orange))
                 .setFirstSelectedPosition(0)
                 .initialise();
 

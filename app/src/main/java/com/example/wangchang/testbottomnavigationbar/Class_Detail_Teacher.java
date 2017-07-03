@@ -1,14 +1,12 @@
 package com.example.wangchang.testbottomnavigationbar;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,11 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 import Beans.Course;
-import Beans.User;
 
-import static java.security.AccessController.getContext;
-
-public class Class_Detail_Teacher extends AppCompatActivity {
+public class Class_Detail_Teacher extends BaseActivity{
     private ListView listView;
     private List<Map<String, Object>> mData;
     private Course course;
