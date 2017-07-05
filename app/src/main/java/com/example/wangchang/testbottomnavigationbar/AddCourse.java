@@ -2,34 +2,24 @@ package com.example.wangchang.testbottomnavigationbar;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.res.ObbInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
-import android.support.v4.os.CancellationSignal;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
-import Beans.Course;
 import Beans.User;
-
-import static android.R.string.cancel;
 
 /**
  * Created by lele on 2017/6/29.
@@ -81,9 +71,11 @@ public class AddCourse extends DialogFragment {
             @Override
             public void onClick(View v) {
                 String path = "http://www.hitolx.cn:8080/web0427/android/buildCourse.action";
-                String body = "sessionId="+ URLEncoder.encode(User.sessionId)+"&courseName=" + URLEncoder.encode(courseName.getText().toString()) +
-                        "&courseTime=" + URLEncoder.encode(courseTime.getText().toString())+"&courseLocation=" + URLEncoder.encode(courseLocation.getText().toString())+
-                        "&courseDescribe=" + URLEncoder.encode(courseDescription.getText().toString());
+                String body = "sessionId="+ URLEncoder.encode(User.sessionId)+"&courseName="
+                        + URLEncoder.encode(courseName.getText().toString()) +
+                        "&courseTime=" + URLEncoder.encode(courseTime.getText().toString())
+                        +"&courseLocation=" + URLEncoder.encode(courseLocation.getText().toString())
+                        + "&courseDescribe=" + URLEncoder.encode(courseDescription.getText().toString());
                 HttpUtils.postHttpData(path,handler,body);
             }
         });
@@ -103,9 +95,7 @@ public class AddCourse extends DialogFragment {
                 case SUCCESS:
                     JSONAnalysis(msg.obj.toString());
                     //Toast.makeText(getActivity(), "获取数据成功", Toast.LENGTH_SHORT)
-                    //        .show();
                     break;
-
                 case FAILURE:
                     Toast.makeText(getActivity(), "获取数据失败", Toast.LENGTH_SHORT)
                             .show();

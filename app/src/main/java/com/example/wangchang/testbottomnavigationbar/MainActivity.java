@@ -54,6 +54,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         transaction.commit();
     }
 
+    //将Fragment加入fragments里面
     private ArrayList<Fragment> getFragments() {
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(AddFragment.newInstance("添加课程"));
@@ -62,6 +63,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         return fragments;
     }
 
+    //点击时加载对应的fragment
     @Override
     public void onTabSelected(int position) {
         if (fragments != null) {
@@ -69,16 +71,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 Fragment fragment = fragments.get(position);
-                /*if (fragment.isAdded()) {
-                    ft.replace(R.id.layFrame, fragment);
-                } else {
-                    ft.add(R.id.layFrame, fragment);
-                }*/
                 ft.replace(R.id.layFrame,fragment);
                 ft.commitAllowingStateLoss();
             }
         }
-
     }
 
     @Override
