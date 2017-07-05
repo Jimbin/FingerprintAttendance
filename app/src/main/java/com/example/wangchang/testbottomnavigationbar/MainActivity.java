@@ -42,6 +42,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         bottomNavigationBar.setTabSelectedListener(this);
     }
 
+
+
     /**
      * 设置默认的
      */

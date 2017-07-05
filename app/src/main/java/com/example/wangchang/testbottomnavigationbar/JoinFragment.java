@@ -1,11 +1,14 @@
 package com.example.wangchang.testbottomnavigationbar;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,9 +29,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,8 +37,6 @@ import java.util.Map;
 
 import Beans.Course;
 import Beans.User;
-
-import static com.example.wangchang.testbottomnavigationbar.R.id.tv;
 
 /**
  * Created by 打错的明天 on 2017/5/15.
@@ -51,6 +49,9 @@ public class JoinFragment extends Fragment{
     private final int FAILURE = 0;
     private final int ERRORCODE = 2;
 
+    private FloatingActionButton fab_del,fab_add,fab_menu;
+    private boolean IsOpen=false;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,6 +62,61 @@ public class JoinFragment extends Fragment{
         return view;
     }
 
+    //07.04  Jim
+    private void init(){
+
+        initfab();
+        fab_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JoinCourse passwordDialogFragment = new JoinCourse();
+                passwordDialogFragment.show(getActivity().getFragmentManager(), "JoinCourseFragment");
+            }
+        });
+        fab_del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //删除课程
+                Toast.makeText(getActivity(), ""+"删除", Toast.LENGTH_SHORT).show();
+            }
+        });
+        fab_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(IsOpen){
+                    //按钮回收
+                    endAnimation(fab_menu,0);
+                    endAnimation(fab_add,1);
+                    endAnimation(fab_del,2);
+                    IsOpen=false;
+                }else {
+                    //按钮展开
+                    startAnimation(fab_menu,0);
+                    startAnimation(fab_add,1);
+                    startAnimation(fab_del,2);
+                    IsOpen=true;
+                }
+            }
+        });
+    }
+    private void initfab(){
+        fab_add= (FloatingActionButton)getActivity().findViewById(R.id.fab_add);
+        fab_del= (FloatingActionButton)getActivity().findViewById(R.id.fab_del);
+        fab_menu= (FloatingActionButton) getActivity().findViewById(R.id.fab_menu);
+    }
+    //07.04  Jim
+    //按钮动画实现
+    private void startAnimation(View view,int i) {
+        PropertyValuesHolder t1=PropertyValuesHolder.ofFloat( "translationY",0f,-i*150f);
+        PropertyValuesHolder r1=PropertyValuesHolder.ofFloat("rotation",0.0f,360.0f);
+        ObjectAnimator.ofPropertyValuesHolder(view,t1,r1).setDuration(500).start();
+    }
+    //07.04  Jim
+    private void endAnimation(View view,int i) {
+        PropertyValuesHolder t1=PropertyValuesHolder.ofFloat( "translationY",-i*150f,0f);
+        PropertyValuesHolder r1=PropertyValuesHolder.ofFloat("rotation",0.0f,360.0f);
+        ObjectAnimator.ofPropertyValuesHolder(view,t1,r1).setDuration(500).start();
+    }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
@@ -78,6 +134,8 @@ public class JoinFragment extends Fragment{
         String path = "http://www.hitolx.cn:8080/web0427/android/getJoinCoursesAll.action?sessionId=";
         path=path+ User.sessionId;
         HttpUtils.getHttpData(path,handler);
+        init();
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

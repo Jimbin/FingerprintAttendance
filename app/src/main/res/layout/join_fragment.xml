@@ -9,13 +9,40 @@
         android:layout_width="match_parent"
         >
     </android.support.v7.widget.Toolbar>
-    <ListView
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/JoinListView"
-        android:divider="#90909090"
-        android:dividerHeight="0.2dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        ></ListView>
+        android:layout_height="match_parent">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/JoinListView"
+            android:divider="#90909090"
+            android:dividerHeight="0.2dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            ></ListView>
+        <android.support.design.widget.FloatingActionButton
+            style="@style/FabStyle"
+            android:src="@drawable/delete"
+            android:id="@+id/fab_del"
+            android:onClick="fab_del"
+            abackgroundTint="@color/colorAccent" />
+
+        <android.support.design.widget.FloatingActionButton
+            style="@style/FabStyle"
+            android:src="@drawable/add"
+            android:id="@+id/fab_add"
+            android:onClick="fab_add"
+            backgroundTint="@color/colorAccent" />
+
+        <android.support.design.widget.FloatingActionButton
+            style="@style/FabStyle"
+            android:src="@drawable/menu"
+            android:id="@+id/fab_menu"
+            android:onClick="fab_menu"
+            backgroundTint="@color/colorAccent" />
+    </FrameLayout>
+
 </LinearLayout>
