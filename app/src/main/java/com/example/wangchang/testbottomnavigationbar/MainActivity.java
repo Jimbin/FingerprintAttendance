@@ -31,9 +31,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 .setBackgroundColor(Color.RED)
                 .setText("5")
                 .setHideOnSelect(true);
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_add_white_24dp, "创建").setActiveColorResource(R.color.orange))
-                .addItem(new BottomNavigationItem(R.drawable.ic_group_add_black_24dp, "加入").setActiveColorResource(R.color.orange))
-                .addItem(new BottomNavigationItem(R.drawable.courselocation, "我").setActiveColorResource(R.color.orange))
+        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_add_white_24dp, "创建")
+                .setActiveColorResource(R.color.orange))
+                .addItem(new BottomNavigationItem(R.drawable.ic_group_add_black_24dp, "加入")
+                        .setActiveColorResource(R.color.orange))
+                .addItem(new BottomNavigationItem(R.drawable.courselocation, "我")
+                        .setActiveColorResource(R.color.orange))
                 .setFirstSelectedPosition(0)
                 .initialise();
 

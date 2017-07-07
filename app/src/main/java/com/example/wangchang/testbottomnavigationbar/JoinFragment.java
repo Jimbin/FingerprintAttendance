@@ -54,7 +54,8 @@ public class JoinFragment extends Fragment{
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.join_fragment, container, false);
         setHasOptionsMenu(true);
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -126,10 +127,7 @@ public class JoinFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //TextView tv = (TextView) getActivity().findViewById(R.id.tv);
-        //tv.setText(getArguments().getString("ARGS"));
         listView = (ListView) getActivity().findViewById(R.id.JoinListView);
-
 
         String path = "http://www.hitolx.cn:8080/web0427/android/getJoinCoursesAll.action?sessionId=";
         path=path+ User.sessionId;
@@ -151,8 +149,6 @@ public class JoinFragment extends Fragment{
                 Toast.makeText(getActivity(), ""+"删除", Toast.LENGTH_SHORT).show();
                 break;
         }
-//         Toast.makeText(MainActivity.this, ""+item.getItemId(), Toast.LENGTH_SHORT).show();
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -203,12 +199,11 @@ public class JoinFragment extends Fragment{
     };
 
     /**
-     * JSON解析方法
+     * JSON解析方法、解析服务器传来的内容，并将它们设置到view里面
      */
     protected void JSONAnalysis(String string) {
         JSONObject object = null;
         Courses = new ArrayList<Course>();
-
         try {
             object = new JSONObject(string);
         } catch (JSONException e) {

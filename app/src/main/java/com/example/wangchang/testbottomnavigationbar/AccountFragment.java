@@ -21,7 +21,8 @@ public class AccountFragment extends Fragment{
     private static Context mcontext;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.account_fragment, container, false);
         item_list= (ListView) view.findViewById(R.id.item_list);
         initList();
@@ -36,7 +37,7 @@ public class AccountFragment extends Fragment{
 
     public static AccountFragment newInstance(String content,Context context) {
         Bundle args = new Bundle();
-        args.putString("ARGS", content);
+        args.putString("ARGS", content);        //利用bundle将参数
         AccountFragment fragment = new AccountFragment();
         fragment.setArguments(args);
         mcontext=context;

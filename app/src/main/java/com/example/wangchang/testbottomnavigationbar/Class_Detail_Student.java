@@ -45,7 +45,8 @@ public class Class_Detail_Student extends BaseActivity {
 
         mData = getData();
 
-        SimpleAdapter adapter = new SimpleAdapter(this,mData,R.layout.record_item,new String[]{"time","YesOrNo"},new int[]{R.id.Record_item,R.id.Record_time});
+        SimpleAdapter adapter = new SimpleAdapter(this,mData,R.layout.record_item,
+                new String[]{"time","YesOrNo"},new int[]{R.id.Record_item,R.id.Record_time});
         listView.setAdapter(adapter);
 
         Open=(Button)findViewById(R.id.Open);
