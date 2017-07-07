@@ -2,21 +2,28 @@ package com.example.wangchang.testbottomnavigationbar;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
+import Beans.Course;
 import Beans.User;
 
-public class Login extends BaseActivity {
+import static Beans.User.sessionId;
+
+public class Login extends AppCompatActivity {
     private EditText account;
     private EditText password;
     private Button   submit;
@@ -26,18 +33,14 @@ public class Login extends BaseActivity {
     private final int SUCCESS = 1;
     private final int FAILURE = 0;
     private final int ERRORCODE = 2;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
-
     }
-//    public static void show(){
-//        Log.d("weizhi", "纬度: "+mlatitute1+'\n'+"经度"+mlongitute1);
-//
-//    }
     private void init(){
         account=(EditText) findViewById(R.id.account);
         password=(EditText) findViewById(R.id.password);
@@ -46,6 +49,14 @@ public class Login extends BaseActivity {
         toolbar=(Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
+
+        sp = getSharedPreferences("dataInfo",MODE_PRIVATE);
+        boolean choseAutoLogin =sp.getBoolean("autologin", false);
+        if(choseAutoLogin){
+            String path = "http://www.hitolx.cn:8080/web0427/android/member_login.action?memberAccount=";
+            path=path+ sp.getString("username","none")+"&psWord="+sp.getString("password","none");
+            HttpUtils.getHttpData(path,handler);
+        }
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +68,11 @@ public class Login extends BaseActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("username",account.getText().toString());
+                editor.putString("password",password.getText().toString());
+                editor.putBoolean("autologin", true);
+                editor.commit();
                 String path = "http://www.hitolx.cn:8080/web0427/android/member_login.action?memberAccount=";
                 path=path+ account.getText().toString()+"&psWord="+password.getText().toString();
                 HttpUtils.getHttpData(path,handler);
@@ -113,12 +129,6 @@ public class Login extends BaseActivity {
     private void login(String sessionId)
     {
         User.sessionId = sessionId;
-        SharedPreferences sp = getSharedPreferences("account",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("username",account.getText().toString());
-        editor.putString("password",password.getText().toString());
-        editor.commit();
-
         Toast.makeText(Login.this, "登录成功", Toast.LENGTH_SHORT)
                 .show();
         Intent intent = new Intent(Login.this,MainActivity.class);

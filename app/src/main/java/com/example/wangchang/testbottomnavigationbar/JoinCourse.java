@@ -125,7 +125,9 @@ public class JoinCourse extends DialogFragment {
         String result = object.optString("result");
         String message = object.optString("message");
         Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
-        getDialog().dismiss();
+        if (message.equals("用户成功加入该课程")) {
+            getDialog().dismiss();
+        }
 
     }
 }

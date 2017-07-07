@@ -31,12 +31,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 .setBackgroundColor(Color.RED)
                 .setText("5")
                 .setHideOnSelect(true);
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_add_white_24dp, "创建")
-                .setActiveColorResource(R.color.orange))
-                .addItem(new BottomNavigationItem(R.drawable.ic_group_add_black_24dp, "加入")
-                        .setActiveColorResource(R.color.orange))
-                .addItem(new BottomNavigationItem(R.drawable.courselocation, "我")
-                        .setActiveColorResource(R.color.orange))
+        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_add_white_24dp, "创建").setActiveColorResource(R.color.orange))
+                .addItem(new BottomNavigationItem(R.drawable.ic_group_add_black_24dp, "加入").setActiveColorResource(R.color.orange))
+                .addItem(new BottomNavigationItem(R.drawable.ic_me, "我").setActiveColorResource(R.color.orange))
                 .setFirstSelectedPosition(0)
                 .initialise();
 
@@ -44,8 +41,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         setDefaultFragment();
         bottomNavigationBar.setTabSelectedListener(this);
     }
-
-
 
     /**
      * 设置默认的
@@ -57,7 +52,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         transaction.commit();
     }
 
-    //将Fragment加入fragments里面
     private ArrayList<Fragment> getFragments() {
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(AddFragment.newInstance("添加课程"));
@@ -66,7 +60,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         return fragments;
     }
 
-    //点击时加载对应的fragment
     @Override
     public void onTabSelected(int position) {
         if (fragments != null) {
@@ -74,10 +67,16 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 Fragment fragment = fragments.get(position);
+                /*if (fragment.isAdded()) {
+                    ft.replace(R.id.layFrame, fragment);
+                } else {
+                    ft.add(R.id.layFrame, fragment);
+                }*/
                 ft.replace(R.id.layFrame,fragment);
                 ft.commitAllowingStateLoss();
             }
         }
+
     }
 
     @Override

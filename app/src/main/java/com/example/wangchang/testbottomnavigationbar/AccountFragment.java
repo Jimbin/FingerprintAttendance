@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +23,10 @@ public class AccountFragment extends Fragment{
     private static Context mcontext;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.account_fragment, container, false);
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         item_list= (ListView) view.findViewById(R.id.item_list);
         initList();
         return view;
@@ -32,12 +35,13 @@ public class AccountFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        //TextView tv = (TextView) getActivity().findViewById(R.id.tv);
+        //tv.setText(getArguments().getString("ARGS"));
     }
 
     public static AccountFragment newInstance(String content,Context context) {
         Bundle args = new Bundle();
-        args.putString("ARGS", content);        //利用bundle将参数
+        args.putString("ARGS", content);
         AccountFragment fragment = new AccountFragment();
         fragment.setArguments(args);
         mcontext=context;
@@ -52,6 +56,7 @@ public class AccountFragment extends Fragment{
         list.add(new StringAndInt("用户反馈",R.drawable.feedback,false));
         list.add(new StringAndInt("关于我们",R.drawable.about_us,true));
         list.add(new StringAndInt("设置",R.drawable.setting_,true));
+        list.add(new StringAndInt("登出",R.drawable.ic_out,false));
         ListitemAdaper itemListAdapter=new ListitemAdaper(mcontext,list);
         item_list.setAdapter(itemListAdapter);
     }

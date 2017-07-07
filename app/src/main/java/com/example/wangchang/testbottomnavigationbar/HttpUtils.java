@@ -12,13 +12,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+
+import Beans.User;
 
 /**
  * 将字节流转换为字符串的工具类
  */
 public class HttpUtils {
 
-    //将InputSAtream转为字符串
     public static String readMyInputStream(InputStream is) {
         byte[] result;
         try {

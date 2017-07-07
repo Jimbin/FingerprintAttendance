@@ -2,112 +2,22 @@
 <items version="2" >
 
     <item
-        is-multidex="false"
-        jar="C:\Users\Jim斌\.android\build-cache\4cab7fd775b3a13726b0c94fc2d57b391cb98d5f\output\jars\classes.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="F:\Fingerprint_Attendance\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="F:\Demo\testBottomNavigationBar\app\build\intermediates\pre-dexed\release\classes_2366fa9e7f2ece9dc259b380788a24385878b8fe.jar" />
+        sha1="e207e855256283e02ab35c6dbeb91f7e54ab7394">
+        <dex dex="F:\Fingerprint_Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_09d0e0165b633b5290771b4d78f6aa74a994b42e\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="F:\Demo\testBottomNavigationBar\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="F:\Fingerprint_Attendance\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="F:\Demo\testBottomNavigationBar\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_b753ac6b92f68645ea01c37c3900dd8d92238469\classes.dex" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="F:\as2.0SDKinstall\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
-        <dex dex="F:\Demo\testBottomNavigationBar\app\build\intermediates\pre-dexed\release\support-annotations-23.4.0_413518b65ebf904cfe49cd6fda2b4a1ff724848b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jim斌\.android\build-cache\2e397c449867b524cf71e9f3b00b16db028f925b\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
-        <dex dex="F:\Demo\testBottomNavigationBar\app\build\intermediates\pre-dexed\release\classes_3cc5dd78ea21bbddfcad812b7b1d0955cb98a942.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Jim斌\.gradle\caches\modules-2\files-2.1\com.amap.api\location\3.4.1\ebe380d6da0d59db86ff68c843b3b8467ab26506\location-3.4.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ebe380d6da0d59db86ff68c843b3b8467ab26506">
-        <dex dex="F:\Demo\testBottomNavigationBar\app\build\intermediates\transforms\dex\debug\folders\1000\10\location-3.4.1_b21b9863b1080027dc4391c7b38b6a1b6ab8000f\classes.dex" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jim斌\.android\build-cache\f30b7eaa48beb89968f55630061ed24cd1b4db6c\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
-        <dex dex="F:\Demo\testBottomNavigationBar\app\build\intermediates\pre-dexed\release\classes_fb6d36a1f813f2eafe1795218d910446f455b4fb.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jim斌\.android\build-cache\31b9052491e6451d3b6cf163144e164925d1c496\output\jars\libs\internal_impl-23.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="F:\Demo\testBottomNavigationBar\app\build\intermediates\pre-dexed\release\internal_impl-23.4.0_7a2cf1cce1876a31254407c0f7d24d6890f164f9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jim斌\.android\build-cache\8ceef027b62c603819e095e63687e544ed6b792a\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="F:\Demo\testBottomNavigationBar\app\build\intermediates\pre-dexed\release\classes_77322df2df84c75a36f6ccad0faf5b49e9ea3902.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="F:\Demo\testBottomNavigationBar\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="34e7e5260a067871c03f93c1d8aef2150ec0ceee">
-        <dex dex="F:\Demo\testBottomNavigationBar\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_883e8788a64410bdc73461d73fe7a834b0324495\classes.dex" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jim斌\.android\build-cache\c87e2db55802f4e872295b7ec8573a6c864333c3\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="F:\Demo\testBottomNavigationBar\app\build\intermediates\pre-dexed\release\classes_d39e718896313afd0ee2a5ddee34ead2a4d02b95.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jim斌\.android\build-cache\68fb91050d09350e48b6fbf068d53001870ab1f0\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="f72894374bf136ef52ef3098dd9039ae32e6fec4">
-        <dex dex="F:\Demo\testBottomNavigationBar\app\build\intermediates\pre-dexed\release\classes_10478593e7d2bdc11018120640deea7dc848409f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Jim斌\.android\build-cache\31b9052491e6451d3b6cf163144e164925d1c496\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="F:\Demo\testBottomNavigationBar\app\build\intermediates\pre-dexed\release\classes_ec05dedca1eecce303dc87b9ec55bec5a0496ca3.jar" />
+        <dex dex="F:\Fingerprint_Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_6359f648b48d2e8ca99ee7b56bc4ef5f88560e12\classes.dex" />
     </item>
 
 </items>

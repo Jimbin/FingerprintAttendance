@@ -38,6 +38,8 @@ import java.util.Map;
 import Beans.Course;
 import Beans.User;
 
+import static android.R.attr.button;
+
 /**
  * Created by 打错的明天 on 2017/5/15.
  */
@@ -54,8 +56,7 @@ public class JoinFragment extends Fragment{
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.join_fragment, container, false);
         setHasOptionsMenu(true);
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -78,7 +79,12 @@ public class JoinFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 //删除课程
-                Toast.makeText(getActivity(), ""+"删除", Toast.LENGTH_SHORT).show();
+                for (int i=0;i<Courses.size();i++)
+                {
+                    mData.get(i).put("Button","删除");
+                }
+                MyAdapter myAdapter=new MyAdapter(getActivity().getBaseContext());
+                listView.setAdapter(myAdapter);
             }
         });
         fab_menu.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +133,10 @@ public class JoinFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //TextView tv = (TextView) getActivity().findViewById(R.id.tv);
+        //tv.setText(getArguments().getString("ARGS"));
         listView = (ListView) getActivity().findViewById(R.id.JoinListView);
+
 
         String path = "http://www.hitolx.cn:8080/web0427/android/getJoinCoursesAll.action?sessionId=";
         path=path+ User.sessionId;
@@ -146,9 +155,16 @@ public class JoinFragment extends Fragment{
                 break;
             case R.id.remove_item:
 
-                Toast.makeText(getActivity(), ""+"删除", Toast.LENGTH_SHORT).show();
+                for (int i=0;i<Courses.size();i++)
+                {
+                    mData.get(i).put("Button","删除");
+                }
+                MyAdapter myAdapter=new MyAdapter(getActivity().getBaseContext());
+                listView.setAdapter(myAdapter);
                 break;
         }
+//         Toast.makeText(MainActivity.this, ""+item.getItemId(), Toast.LENGTH_SHORT).show();
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -169,6 +185,7 @@ public class JoinFragment extends Fragment{
             map.put("ClassName", Courses.get(i).getCourseName());
             map.put("ClassTime", Courses.get(i).getCourseTime());
             map.put("ClassLocation", Courses.get(i).getCourseLocation());
+            map.put("Button","详情");
             list.add(map);
         }
         return list;
@@ -199,19 +216,21 @@ public class JoinFragment extends Fragment{
     };
 
     /**
-     * JSON解析方法、解析服务器传来的内容，并将它们设置到view里面
+     * JSON解析方法
      */
     protected void JSONAnalysis(String string) {
         JSONObject object = null;
-        Courses = new ArrayList<Course>();
+
         try {
             object = new JSONObject(string);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         String message = object.optString("message");
-        if(!message.equals("退出课程成功")){
+        if(message.equals("查询课程学生信息成功")){
         try {
+            Courses = new ArrayList<Course>();
+
             JSONArray jsonArray=object.getJSONArray("courseVOs");
             for (int i=0;i<jsonArray.length();i++)
             {
@@ -226,7 +245,9 @@ public class JoinFragment extends Fragment{
                 temp.setCreateTime(ObjectInfo.optString("createTime")==null?"":ObjectInfo.optString("createTime"));
                 temp.setMemberId(ObjectInfo.optString("memberId")==null?"":ObjectInfo.optString("memberId"));
                 temp.setSignStatus(ObjectInfo.optString("signStatus")==null?"":ObjectInfo.optString("signStatus"));
-
+                temp.setMemberName(ObjectInfo.optString("memberName")==null?"":ObjectInfo.optString("memberName"));
+                temp.setLatitude(ObjectInfo.optString("latitude")==null?"":ObjectInfo.optString("latitude"));
+                temp.setLongitude(ObjectInfo.optString("longitude")==null?"":ObjectInfo.optString("longitude"));
                 Courses.add(temp);
             }
 
@@ -237,11 +258,13 @@ public class JoinFragment extends Fragment{
         mData = getData();
         MyAdapter myAdapter=new MyAdapter(getActivity().getBaseContext());
         listView.setAdapter(myAdapter);}
-        else{
+        if(message.equals("退出课程成功")){
             Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
             String path = "http://www.hitolx.cn:8080/web0427/android/getJoinCoursesAll.action?sessionId=";
             path=path+ User.sessionId;
             HttpUtils.getHttpData(path,handler);
+        }else {
+            Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -285,6 +308,7 @@ public class JoinFragment extends Fragment{
 
             ViewHolder holder = null;
             final int pos=position;
+            final String button;
             if (convertView == null) {
 
                 holder=new ViewHolder();
@@ -305,6 +329,8 @@ public class JoinFragment extends Fragment{
             holder.ClassName.setText((String)mData.get(position).get("ClassName"));
             holder.ClassTime.setText((String)mData.get(position).get("ClassTime"));
             holder.ClassLocation.setText((String)mData.get(position).get("ClassLocation"));
+            holder.button.setText((String)mData.get(position).get("Button"));
+            button =  holder.button.getText().toString();
 
             holder.item.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -319,9 +345,17 @@ public class JoinFragment extends Fragment{
             holder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public  void onClick(View view) {
-                    String url="http://www.hitolx.cn:8080/web0427/android/exitCourse.action";
-                    String body = "sessionId="+ URLEncoder.encode(User.sessionId)+"&courseId=" + URLEncoder.encode(Courses.get(pos).getCourseId());
-                    HttpUtils.postHttpData(url,handler,body);
+                    if (button.equals("删除")){
+                        String url="http://www.hitolx.cn:8080/web0427/android/exitCourse.action";
+                        String body = "sessionId="+ URLEncoder.encode(User.sessionId)+"&courseId=" + URLEncoder.encode(Courses.get(pos).getCourseId());
+                        HttpUtils.postHttpData(url,handler,body);
+                    }else{
+                        Intent intent = new Intent(getActivity(),Class_Detail_Student.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("course", Courses.get(pos));
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
                 }
             });
 

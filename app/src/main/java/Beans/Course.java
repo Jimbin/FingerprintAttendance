@@ -2,6 +2,8 @@ package Beans;
 
 import java.io.Serializable;
 
+import static Beans.User.memberName;
+
 /**
  * Created by lele on 2017/6/26.
  */
@@ -17,6 +19,35 @@ public class Course implements Serializable {
     String memberId;
     String signStatus;
     String startCourseId;
+    String longitude;
+    String latitude;
+    String memberName;
+
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
 
     public String getCourseDescribe() {
         return courseDescribe;

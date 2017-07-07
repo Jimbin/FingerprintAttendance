@@ -92,7 +92,12 @@ public class AddFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //删除课程
-                Toast.makeText(getActivity(), ""+"删除", Toast.LENGTH_SHORT).show();
+                for (int i=0;i<Courses.size();i++)
+                {
+                    mData.get(i).put("Button","删除");
+                }
+                MyAdapter myAdapter=new MyAdapter(getActivity().getBaseContext());
+                listView.setAdapter(myAdapter);
             }
         });
         fab_menu.setOnClickListener(new View.OnClickListener() {
@@ -148,8 +153,12 @@ public class AddFragment extends Fragment {
 
                 break;
             case R.id.remove_item:
-
-                Toast.makeText(getActivity(), ""+"删除", Toast.LENGTH_SHORT).show();
+                for (int i=0;i<Courses.size();i++)
+                {
+                    mData.get(i).put("Button","删除");
+                }
+                MyAdapter myAdapter=new MyAdapter(getActivity().getBaseContext());
+                listView.setAdapter(myAdapter);
                 break;
         }
 //         Toast.makeText(MainActivity.this, ""+item.getItemId(), Toast.LENGTH_SHORT).show();
@@ -173,6 +182,7 @@ public class AddFragment extends Fragment {
             map.put("ClassName", Courses.get(i).getCourseName());
             map.put("ClassTime", Courses.get(i).getCourseTime());
             map.put("ClassLocation", Courses.get(i).getCourseLocation());
+            map.put("Button","详情");
             list.add(map);
         }
         return list;
@@ -207,7 +217,6 @@ public class AddFragment extends Fragment {
      */
     protected void JSONAnalysis(String string) {
         JSONObject object = null;
-        Courses = new ArrayList<Course>();
 
         try {
             object = new JSONObject(string);
@@ -215,8 +224,9 @@ public class AddFragment extends Fragment {
             e.printStackTrace();
         }
         String message = object.optString("message");
-        if(!message.equals("删除成功")){
+        if(message.equals("查询用户创建的课程成功")){
         try {
+            Courses = new ArrayList<Course>();
             JSONArray jsonArray=object.getJSONArray("courses");
             for (int i=0;i<jsonArray.length();i++)
             {
@@ -242,11 +252,14 @@ public class AddFragment extends Fragment {
         mData = getData();
         MyAdapter myAdapter=new MyAdapter(getActivity().getBaseContext());
         listView.setAdapter(myAdapter);
-        }else {
+        }if (message.equals("删除成功")){
             Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
             String path = "http://www.hitolx.cn:8080/web0427/android/getCoursesBelongMember.action?sessionId=";
             path=path+ User.sessionId;
             HttpUtils.getHttpData(path,handler);
+        }else
+        {
+            Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -291,6 +304,7 @@ public class AddFragment extends Fragment {
 
             ViewHolder holder = null;
             final int pos=position;
+            final String button;
             if (convertView == null) {
 
                 holder=new ViewHolder();
@@ -311,6 +325,8 @@ public class AddFragment extends Fragment {
             holder.ClassName.setText((String)mData.get(position).get("ClassName"));
             holder.ClassTime.setText((String)mData.get(position).get("ClassTime"));
             holder.ClassLocation.setText((String)mData.get(position).get("ClassLocation"));
+            holder.button.setText((String)mData.get(position).get("Button"));
+            button =  holder.button.getText().toString();
 
             holder.item.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -325,9 +341,17 @@ public class AddFragment extends Fragment {
             holder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public  void onClick(View view) {
+                    if (button.equals("删除")){
                     String url="http://www.hitolx.cn:8080/web0427/android/deleteCourse.action";
                     String body = "sessionId="+ URLEncoder.encode(User.sessionId)+"&courseId=" + URLEncoder.encode(Courses.get(position).getCourseId());
                     HttpUtils.postHttpData(url,handler,body);
+                    }else{
+                        Intent intent = new Intent(getActivity(),Class_Detail_Teacher.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("course", Courses.get(position));
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
                 }
             });
 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="20dp"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/UserName"
+        style="@style/EditTextStyle"
+        android:hint="用户姓名"
+        android:drawableLeft="@drawable/title"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/UserId"
+        style="@style/EditTextStyle"
+        android:hint="用户学号"
+        android:drawableLeft="@drawable/describtion"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/UserSex"
+        style="@style/EditTextStyle"
+        android:hint="性别"
+        android:drawableLeft="@drawable/ic_sex"/>
+    <EditText
+        android:id="@+id/UserSchool"
+        style="@style/EditTextStyle"
+        android:hint="学校"
+        android:drawableLeft="@drawable/ic_school"
+        android:inputType="text"/>
+    <EditText
+        android:id="@+id/UserEmail"
+        style="@style/EditTextStyle"
+        android:hint="邮箱"
+        android:drawableLeft="@drawable/ic_email"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/UserPhone"
+        style="@style/EditTextStyle"
+        android:hint="电话"
+        android:drawableLeft="@drawable/ic_phone"
+        android:inputType="text"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Space
+            android:id="@+id/spacer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="invisible" />
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonBarNegativeButtonStyle"
+            android:layout_gravity="end"
+            android:text="确定"
+            tools:targetApi="lollipop" />
+    </LinearLayout>
+
+
+</LinearLayout>

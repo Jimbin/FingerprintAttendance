@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import Beans.User;
+
+import static android.R.attr.path;
+import static com.example.wangchang.testbottomnavigationbar.BaseActivity.mlatitute1;
+import static com.example.wangchang.testbottomnavigationbar.BaseActivity.mlongitute1;
+
 
 public class FingerPrint_Fragment extends DialogFragment {
     private static final long ERROR_TIMEOUT_MILLIS = 1600;
@@ -33,7 +43,11 @@ public class FingerPrint_Fragment extends DialogFragment {
     private TextView mErrorTextView;
     private ImageView mIcon;
     private Button cancel;
+    double dis;
 
+    private final int SUCCESS = 1;
+    private final int FAILURE = 0;
+    private final int ERRORCODE = 2;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -148,7 +162,7 @@ public class FingerPrint_Fragment extends DialogFragment {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
                             }
-                        getDialog().dismiss();
+                        sign();
                 }
             });
             thread.start();
@@ -177,5 +191,61 @@ public class FingerPrint_Fragment extends DialogFragment {
         }
     };
 
+    public void sign()
+    {
+        Bundle bundle=getArguments();
+        dis = Distance.Distance(mlongitute1,mlatitute1,Double.valueOf(bundle.getString("longitude","")),Double.valueOf(bundle.getString("latitude","")));
+        if (dis<200.0){//如果距离小于200则签到成功，否则失败
+            String path = "http://www.hitolx.cn:8080/web0427/android/signCourses.action?sessionId=";
+            path=path+ User.sessionId+"&courseId="+bundle.getString("courseId","");
+            HttpUtils.getHttpData(path,handler);}
+        else{
+            Toast.makeText(getActivity(),"你距离老师过远达"+String.valueOf(dis)+"米,签到失败!",Toast.LENGTH_SHORT).show();
+        }
+    }
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SUCCESS:
+                    JSONAnalysis(msg.obj.toString());
+                    //Toast.makeText(getActivity(), "获取数据成功", Toast.LENGTH_SHORT)
+                    //        .show();
+                    break;
+
+                case FAILURE:
+                    Toast.makeText(getActivity(), "获取数据失败", Toast.LENGTH_SHORT)
+                            .show();
+                    break;
+
+                case ERRORCODE:
+                    Toast.makeText(getActivity(), "获取的CODE码不为200！",
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
+            }
+        };
+    };
+
+    /**
+     * JSON解析方法
+     */
+    protected void JSONAnalysis(String string) {
+        JSONObject object = null;
+
+        try {
+            object = new JSONObject(string);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        /**
+         * 在你获取的string这个JSON对象中，提取你所需要的信息。
+         */
+        String result = object.optString("result");
+        String message = object.optString("message");
+        Toast.makeText(getActivity(),"你距离老师"+String.valueOf(dis)+"米,"+message,Toast.LENGTH_SHORT).show();
+        getDialog().dismiss();
+
+    }
 
 }

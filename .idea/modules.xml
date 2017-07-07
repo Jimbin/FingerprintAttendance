@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Fingerprint_Attendance.iml" filepath="$PROJECT_DIR$/Fingerprint_Attendance.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/testBottomNavigationBar.iml" filepath="$PROJECT_DIR$/testBottomNavigationBar.iml" />
     </modules>
   </component>
 </project>

@@ -1,6 +1,8 @@
 package com.example.wangchang.testbottomnavigationbar;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by Jim斌 on 2017/7/1.
  */
@@ -17,9 +21,11 @@ import java.util.List;
 public class ListitemAdaper extends BaseAdapter {
     private List<StringAndInt>list;
     private LayoutInflater mInflater;
+    private Context context;
     public ListitemAdaper(Context context, List<StringAndInt> list){
         mInflater=LayoutInflater.from(context);
         this.list=list;
+        this.context=context;
     }
     public int getCount() {
         return list.size();
@@ -36,7 +42,7 @@ public class ListitemAdaper extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView==null){
             convertView=mInflater.inflate(R.layout.setting_list_item,null);
@@ -58,6 +64,21 @@ public class ListitemAdaper extends BaseAdapter {
         if(viewHolder.gap_view.getVisibility()==View.VISIBLE){
             viewHolder.small_gap_view.setVisibility(View.GONE);
         }
+        viewHolder.viewArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (position==0) {
+                    Intent intent = new Intent(context, Person_Information.class);
+                    context.startActivity(intent);
+                }if (position==7){
+                    SharedPreferences sp= context.getSharedPreferences("dataInfo",MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putBoolean("autologin",false);
+                    editor.commit();
+                    context.startActivity(new Intent(context,Login.class));
+                }
+            }
+        });
         return convertView;
     }
 

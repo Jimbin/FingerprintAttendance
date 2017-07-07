@@ -1,9 +1,10 @@
 package com.example.wangchang.testbottomnavigationbar;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +16,12 @@ import org.json.JSONObject;
 
 import Beans.User;
 
-public class Register extends BaseActivity {
+import static android.R.attr.path;
+import static com.example.wangchang.testbottomnavigationbar.R.id.register;
+import static com.example.wangchang.testbottomnavigationbar.R.id.submit;
+import static com.example.wangchang.testbottomnavigationbar.R.id.toolbar;
+
+public class Register extends AppCompatActivity {
     private EditText account;
     private EditText password;
     private EditText password2;
